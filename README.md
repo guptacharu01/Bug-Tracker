@@ -53,8 +53,4 @@ These are made automatically the first time the backend starts:
 
 Please change these passwords after you log in the first time.
 
-## Deployment (short notes)
 
-- Backend on Render: Runtime Docker, Root Directory `backend`. Set env vars `DB_URL`, `DB_USERNAME`, `DB_PASSWORD` (use a hosted MySQL), `JWT_SECRET` (long random secret), `CORS_ALLOWED_ORIGINS` (your Vercel URL).
-- Frontend on Vercel: Root Directory `frontend`. Set `VITE_API_URL` to `https://<your-render-url>/api`.
-- After deploying, log in and check that registration and the Kanban board work.
