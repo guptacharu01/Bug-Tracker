@@ -1,0 +1,26 @@
+services:
+  db:
+    image: mysql:8
+    container_name: bugtracker-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: bugtracker
+    ports:
+      - "3307:3306"
+    volumes:
+      - bugtracker-data:/var/lib/mysql
+  backend:
+    build: ./backend
+    container_name: bugtracker-backend
+    environment:
+      DB_URL: jdbc:mysql://db:3306/bugtracker?createDatabaseIfNotExist=true&useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true
+      DB_USERNAME: root
+      DB_PASSWORD: root
+      JWT_SECRET: ${JWT_SECRET:-0PK0l1TtZoEfiVTAVx1KEiDRO17RF/wk0/oOPjMNWtwXFRB6RAADFfMFqQ5icEEe}
+      CORS_ALLOWED_ORIGINS: http://localhost:5173
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+volumes:
+  bugtracker-data:
